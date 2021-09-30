@@ -1,9 +1,9 @@
 const Pool = require('pg').Pool;
 
 const pool = new Pool({
-    user: 'postgres',
-    password: 'R6HPzs64',
-    database: 'kanban_database',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     host: 'localhost',
     port: 5432
 })
