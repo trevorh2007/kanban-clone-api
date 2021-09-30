@@ -6,7 +6,6 @@ const pool = require('../db/db')
 router.get('/', async (req, res) => {
     try {
         const allTasks = await pool.query("SELECT * FROM demo_kanban_tasks")
-
         res.json(allTasks.rows)
     } catch (err) {
         console.error(err)
@@ -14,6 +13,15 @@ router.get('/', async (req, res) => {
 })
 
 //get a single task
+router.get('/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        const task = await pool.query("SELECT * FROM demo_kanban_tasks WHERE id = $1", [id])
+        res.json(task.rows[0])
+    } catch (err) {
+        console.error(err)
+    }
+})
 
 //create a task
 router.post('/', async (req, res) => {
@@ -29,7 +37,28 @@ router.post('/', async (req, res) => {
 })
 
 //update task
+router.put('/:id', async (req, res) => {
+    const { id } = req.params
+    const { title, description, priority, column_id } = req.body
+    const textQuery = "UPDATE demo_kanban_tasks SET title = $1, description = $2, priority = $3, column_item_id = $4 WHERE id = $5"
+    const values = [title, description, priority, column_id, id]
+    try {
+        const updateTask = await pool.query(textQuery, values)
+        res.json("Task updated.")
+    } catch (err) {
+        console.error(err)
+    }
+})
 
 //delete task
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        await pool.query("DELETE FROM demo_kanban_tasks WHERE id = $1", [id])
+        res.json("Task deleted.")
+    } catch (err) {
+        console.error(err)
+    }
+})
 
 module.exports = router
