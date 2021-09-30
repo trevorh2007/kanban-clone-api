@@ -1,0 +1,24 @@
+{
+  "name": "kanban-api",
+  "version": "1.0.0",
+  "description": "micro service for personal kanban board project",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trevorh2007/kanban-clone-api.git"
+  },
+  "author": "Trevor Howard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trevorh2007/kanban-clone-api/issues"
+  },
+  "homepage": "https://github.com/trevorh2007/kanban-clone-api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.2"
+  }
+}
