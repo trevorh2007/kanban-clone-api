@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const { id } = req.params
     const { title, description, priority, column_id } = req.body
-    const textQuery = "UPDATE demo_kanban_tasks SET title = $1, description = $2, priority = $3, column_item_id = $4 WHERE id = $5"
+    const textQuery = "UPDATE demo_kanban_tasks SET title = COALESCE($1, title), description = COALESCE($2, description), priority = COALESCE($3, priority), column_item_id = COALESCE($4, column_item_id) WHERE id = $5"
     const values = [title, description, priority, column_id, id]
     try {
         const updateTask = await pool.query(textQuery, values)
