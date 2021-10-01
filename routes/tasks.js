@@ -9,7 +9,12 @@ router.get('/', async (req, res) => {
     FROM (
         SELECT column_item.name, column_item.id, json_build_object(
             'name', column_item.name,
-            'tasks', json_agg(demo_kanban_tasks.*)
+            'tasks', json_agg(demo_kanban_tasks.* ORDER BY CASE demo_kanban_tasks.priority
+                WHEN 'high' THEN 1
+                WHEN 'medium' THEN 2
+                WHEN 'low' THEN 3
+                END
+            )
         ) js
         FROM demo_kanban_tasks 
         FULL JOIN column_item ON demo_kanban_tasks.column_item_id = column_item.id
