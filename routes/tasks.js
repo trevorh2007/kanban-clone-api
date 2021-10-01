@@ -4,8 +4,20 @@ const pool = require('../db/db')
 
 //get all tasks
 router.get('/', async (req, res) => {
+    const textQuery = `
+    SELECT json_object_agg(id, js) res
+    FROM (
+        SELECT column_item.name, column_item.id, json_build_object(
+            'name', column_item.name,
+            'tasks', json_agg(demo_kanban_tasks.*)
+        ) js
+        FROM demo_kanban_tasks 
+        FULL JOIN column_item ON demo_kanban_tasks.column_item_id = column_item.id
+        GROUP BY column_item.id
+        ORDER BY column_item.id
+    ) column_item;`
     try {
-        const allTasks = await pool.query("SELECT * FROM demo_kanban_tasks")
+        const allTasks = await pool.query(textQuery)
         res.json(allTasks.rows)
     } catch (err) {
         console.error(err)

@@ -30,5 +30,3 @@ INSERT INTO column_item (name) VALUES ('COMPLETED');
 -- INSERT INTO demo_kanban_tasks (title, description, priority, column_item_id) VALUES ('Third Task', 'You will need to do X on this third task', 'low', 1);
 -- INSERT INTO demo_kanban_tasks (title, description, priority, column_item_id) VALUES ('Fourth Task', 'You will need to do X on this fourth task', 'medium', 1);
 -- INSERT INTO demo_kanban_tasks (title, description, priority, column_item_id) VALUES ('Fifth Task', 'You will need to do X on this fifth task', 'medium', 1);
-
--- SELECT column_item.name, demo_kanban_tasks.id, title, description, priority FROM demo_kanban_tasks FULL JOIN column_item on demo_kanban_tasks.column_item_id = column_item.id;
