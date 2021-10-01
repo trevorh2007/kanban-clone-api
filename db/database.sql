@@ -9,7 +9,7 @@ CREATE TABLE column_item(
 );
 
 CREATE TABLE demo_kanban_tasks(
-    id SERIAL PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
     title VARCHAR(255),
     description TEXT,
     priority VARCHAR(20),
