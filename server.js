@@ -10,6 +10,10 @@ app.use(express.json())
 const tasksRouter = require('./routes/tasks')
 app.use('/api/tasks', tasksRouter)
 
+app.get('/', (req, res) => {
+    res.status(200).send("App running.")
+})
+
 app.listen(port, function () {
     console.log('Server started on port: ' + port);
 });
