@@ -1,11 +1,13 @@
 const Pool = require('pg').Pool;
 
+var pool;
+
 if (process.env.DATABASE_URL) {
-    const pool = new Pool({
+    pool = new Pool({
         connection: process.env.DATABASE_URL
     })
 } else {
-    const pool = new Pool({
+    pool = new Pool({
         user: process.env.DB_USER,
         password: process.env.DB_PASS,
         database: process.env.DB_NAME,
