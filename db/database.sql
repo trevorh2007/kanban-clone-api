@@ -1,6 +1,6 @@
-CREATE DATABASE kanban_database;
+-- Extension used for uuid generation
 
---\c into kanban_database
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE column_item(
     id SERIAL PRIMARY KEY,
@@ -8,8 +8,8 @@ CREATE TABLE column_item(
     UNIQUE(name)
 );
 
-CREATE TABLE demo_kanban_tasks(
-    id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
+CREATE TABLE tasks(
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     title VARCHAR(255),
     description TEXT,
     priority VARCHAR(20),
@@ -25,8 +25,8 @@ INSERT INTO column_item (name) VALUES ('COMPLETED');
 
 -- mock task data below
 
--- INSERT INTO demo_kanban_tasks (title, description, priority, column_item_id) VALUES ('First Task', 'You will need to do X on this first task', 'high', 1);
--- INSERT INTO demo_kanban_tasks (title, description, priority, column_item_id) VALUES ('Second Task', 'You will need to do X on this second task', 'high', 1);
--- INSERT INTO demo_kanban_tasks (title, description, priority, column_item_id) VALUES ('Third Task', 'You will need to do X on this third task', 'low', 1);
--- INSERT INTO demo_kanban_tasks (title, description, priority, column_item_id) VALUES ('Fourth Task', 'You will need to do X on this fourth task', 'medium', 1);
--- INSERT INTO demo_kanban_tasks (title, description, priority, column_item_id) VALUES ('Fifth Task', 'You will need to do X on this fifth task', 'medium', 1);
+-- INSERT INTO tasks (title, description, priority, column_item_id) VALUES ('First Task', 'You will need to do X on this first task', 'high', 1);
+-- INSERT INTO tasks (title, description, priority, column_item_id) VALUES ('Second Task', 'You will need to do X on this second task', 'high', 1);
+-- INSERT INTO tasks (title, description, priority, column_item_id) VALUES ('Third Task', 'You will need to do X on this third task', 'low', 1);
+-- INSERT INTO tasks (title, description, priority, column_item_id) VALUES ('Fourth Task', 'You will need to do X on this fourth task', 'medium', 1);
+-- INSERT INTO tasks (title, description, priority, column_item_id) VALUES ('Fifth Task', 'You will need to do X on this fifth task', 'medium', 1);
